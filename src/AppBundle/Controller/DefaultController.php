@@ -26,4 +26,17 @@ class DefaultController extends Controller
     {
         return $this->render('default/login.html.twig');
     }
+
+    /**
+     * @Route("/users")
+     */
+    public function userDisplay(Request $request)
+    {
+        $conn = $this->get('database_connection');
+        $users = $conn->fetchAll('SELECT * FROM user');
+        return $this->render('default/users.html.twig', array(
+            'users' => $users
+        ));
+    }    
+    
 }
