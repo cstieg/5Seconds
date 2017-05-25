@@ -20,6 +20,14 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/register")
+     */
+    public function registerAction(Request $request)
+    {
+        return $this->render('default/register.html.twig');
+    }
+
+    /**
      * @Route("/login")
      */
     public function loginAction(Request $request)
@@ -38,5 +46,7 @@ class DefaultController extends Controller
             'users' => $users
         ));
     }    
+    
+    
     
 }
