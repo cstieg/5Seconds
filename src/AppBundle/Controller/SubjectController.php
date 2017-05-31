@@ -36,6 +36,19 @@ class SubjectController extends Controller
         return $this->redirectToRoute('subject_menu', array(), 301);
     }    
     
+    /**
+     * @Route("/editsubject/{subject}", name="edit_subject")
+     * @Method({"POST"})
+     */
+    public function editSubjectAction($subject, Request $request)
+    {
+        $subjectModel = new SubjectModel($this->getDoctrine()->getManager());
+        $newSubject = $request->get('name');
+        $newDescription = $request->get('description');
+        $subjectModel->editSubject($subject);   
+        return $this->redirectToRoute('subject_menu', array(), 301);
+    }    
+    
     
     /**
      * @Route("/subjectmenu", name="subject_menu")

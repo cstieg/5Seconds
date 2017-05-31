@@ -36,4 +36,12 @@ class SubjectModel {
         $this->em->flush();
     }
     
+    public function editSubject(String $subject, String $newSubject, String $description)
+    {
+        $subject = $this->subjectTable->findOneBy(['name' => $subject]);
+        $subject->setName($newSubject);
+        $subject->setDescription($description);
+        $this->em->persist($subject);
+        $this->em->flush();
+    }
 }
