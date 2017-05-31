@@ -29,4 +29,11 @@ class SubjectModel {
         $this->em->flush();
     }
     
+    public function deleteSubject(String $subject)
+    {
+        $subject = $this->subjectTable->findOneBy(['name' => $subject]);
+        $this->em->remove($subject);
+        $this->em->flush();
+    }
+    
 }

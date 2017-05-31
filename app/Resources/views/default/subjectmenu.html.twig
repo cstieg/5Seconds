@@ -17,6 +17,9 @@
                 <li class="table-row">
                     <span class="table-cell">{{subject.name}}</span>
                     <span class="table-cell">{{subject.description}}</span>
+                    <form action="{{path('delete_subject', {'subject': subject.name})}}" method="post">
+                        <button class="delete-button" type="submit">x</button>
+                    </form>
                 </li>
             {% endfor %}
         </ul>

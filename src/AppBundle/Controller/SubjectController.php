@@ -24,6 +24,19 @@ class SubjectController extends Controller
         return $this->redirectToRoute('subject_menu', array(), 301);
     }    
     
+    
+    /**
+     * @Route("/deletesubject/{subject}", name="delete_subject")
+     * @Method({"POST"})
+     */
+    public function deleteSubjectAction($subject)
+    {
+        $subjectModel = new SubjectModel($this->getDoctrine()->getManager());
+        $subjectModel->deleteSubject($subject);   
+        return $this->redirectToRoute('subject_menu', array(), 301);
+    }    
+    
+    
     /**
      * @Route("/subjectmenu", name="subject_menu")
      * @Method({"GET"})
