@@ -17,7 +17,7 @@ class Subject
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, unique=true, nullable=false)
      */
     private $name;
 
@@ -27,9 +27,10 @@ class Subject
     private $description;
     
     
-    public function __construct()
+    public function __construct(String $name, String $description)
     {
-        // your own logic
+        $this->name = $name;
+        $this->description = $description;
     }
 
     /**
