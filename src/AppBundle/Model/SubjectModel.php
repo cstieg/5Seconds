@@ -29,9 +29,9 @@ class SubjectModel {
         $this->em->flush();
     }
     
-    public function deleteSubject(String $subject)
+    public function deleteSubject(String $subjectID)
     {
-        $subject = $this->subjectTable->findOneBy(['name' => $subject]);
+        $subject = $this->subjectTable->find($subjectID);
         $this->em->remove($subject);
         $this->em->flush();
     }

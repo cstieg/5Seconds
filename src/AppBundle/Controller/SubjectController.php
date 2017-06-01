@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Model\SubjectModel;
 
 class SubjectController extends Controller
@@ -26,14 +27,14 @@ class SubjectController extends Controller
     
     
     /**
-     * @Route("/deletesubject/{subject}", name="delete_subject")
+     * @Route("/deletesubject/{subjectID}", name="delete_subject")
      * @Method({"POST"})
      */
-    public function deleteSubjectAction($subject)
+    public function deleteSubjectAction($subjectID)
     {
         $subjectModel = new SubjectModel($this->getDoctrine()->getManager());
-        $subjectModel->deleteSubject($subject);   
-        return $this->redirectToRoute('subject_menu', array(), 301);
+        $subjectModel->deleteSubject($subjectID);   
+        return new Response(Response::HTTP_OK);
     }    
     
     /**
