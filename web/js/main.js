@@ -18,13 +18,13 @@ function deleteSubject(subjectID) {
 function toggleSubjectEditable(subjectID) {
   var $subject = $('#subject' + subjectID);
   if ($subject.find('input').first().prop('disabled') === true) {
-    $subject.find('.edit-button').text('Save');
+    $subject.find('.edit-button').text('save');
     $subject.find('input').prop('disabled', false);
   }
   else {
     editSubject(subjectID);
     $subject.find('input').prop('disabled', true);
-    $subject.find('.edit-button').text('Edit');
+    $subject.find('.edit-button').text('edit');
   }
 }
 
