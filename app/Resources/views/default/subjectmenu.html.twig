@@ -15,9 +15,12 @@
         <ul>
             {% for subject in subjects %}
                 <li class="table-row" id="subject{{subject.id}}">
-                    <span class="table-cell">{{subject.name}}</span>
-                    <span class="table-cell">{{subject.description}}</span>
-                    <button class="delete-button" onclick="deleteSubject('{{subject.id}}')">x</button>
+                    <form onsubmit="return false;">
+                        <input name="name" type="text" value="{{subject.name}}" disabled=true>
+                        <input name="description" type="text" value="{{subject.description}}" disabled=true>
+                        <button class="edit-button" onclick="toggleSubjectEditable('{{subject.id}}')">edit</button>
+                        <button class="delete-button" onclick="deleteSubject('{{subject.id}}')">x</button>
+                    </form>
                 </li>
             {% endfor %}
         </ul>

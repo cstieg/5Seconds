@@ -36,9 +36,9 @@ class SubjectModel {
         $this->em->flush();
     }
     
-    public function editSubject(String $subject, String $newSubject, String $description)
+    public function editSubject(String $subjectID, String $newSubject, String $description)
     {
-        $subject = $this->subjectTable->findOneBy(['name' => $subject]);
+        $subject = $this->subjectTable->find($subjectID);
         $subject->setName($newSubject);
         $subject->setDescription($description);
         $this->em->persist($subject);

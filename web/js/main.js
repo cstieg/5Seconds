@@ -3,9 +3,6 @@
 
 
 function deleteSubject(subjectID) {
-  if (isNaN(parseInt(subjectID))) {
-    throw new Error('Invalid subject!');
-  }
   $.ajax({
       url: '/deletesubject/' + subjectID,
       method: 'POST',
@@ -16,4 +13,37 @@ function deleteSubject(subjectID) {
         alert('Could not delete subject!');
       }
   });
+}
+
+function toggleSubjectEditable(subjectID) {
+  var $subject = $('#subject' + subjectID);
+  if ($subject.find('input').first().prop('disabled') === true) {
+    $subject.find('.edit-button').text('Save');
+    $subject.find('input').prop('disabled', false);
+  }
+  else {
+    editSubject(subjectID);
+    $subject.find('input').prop('disabled', true);
+    $subject.find('.edit-button').text('Edit');
+  }
+}
+
+
+function editSubject(subjectID) {
+  if (isNaN(parseInt(subjectID))) {
+    throw new Error('Invalid subject!');
+  }
+  var $subject = $('#subject' + subjectID + ' form').serialize();
+  $.ajax({
+      url: '/editsubject/' + subjectID,
+      method: 'POST',
+      data: $('#subject' + subjectID + ' form').serialize(),
+      success: function() {
+        alert('Updated!');
+      },
+      error: function(response) {
+        alert('Could not edit subject!');
+      }
+  });
+  return false;
 }

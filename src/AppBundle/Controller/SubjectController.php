@@ -38,16 +38,16 @@ class SubjectController extends Controller
     }    
     
     /**
-     * @Route("/editsubject/{subject}", name="edit_subject")
+     * @Route("/editsubject/{subjectID}", name="edit_subject")
      * @Method({"POST"})
      */
-    public function editSubjectAction($subject, Request $request)
+    public function editSubjectAction($subjectID, Request $request)
     {
         $subjectModel = new SubjectModel($this->getDoctrine()->getManager());
         $newSubject = $request->get('name');
         $newDescription = $request->get('description');
-        $subjectModel->editSubject($subject);   
-        return $this->redirectToRoute('subject_menu', array(), 301);
+        $subjectModel->editSubject($subjectID, $newSubject, $newDescription);   
+        return new Response(Response::HTTP_OK);
     }    
     
     
