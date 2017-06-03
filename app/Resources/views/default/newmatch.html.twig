@@ -1,8 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Match{% endblock title %}
+{% block title %}5 Seconds - New Match{% endblock %}
+{% block heading1 %}New Match{% endblock %}
 
 {% block body %}
-
-
+    <form action="{{path('new_match')}}" method="POST">
+        <input type="text" name="name">
+        <p>
+            Pick subjects:
+        </p>
+        {% for subject in subjects %}
+            <input type="checkbox" name="subjectlist" value="{{subject.id}}">{{subject.name}}<br>
+        {% endfor %}
+        <br>
+        <input type="submit" name="submit" value="Create Match">
+    </form>
 {% endblock body %}

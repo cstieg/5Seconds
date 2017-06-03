@@ -2,10 +2,11 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\User;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="match")
+ * @ORM\Table(name="match_game")
  */
 class Match
 {
@@ -19,7 +20,7 @@ class Match
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $name;
+    private $match_name;
 
     /**
      * @ORM\Column(type="datetime")
@@ -31,9 +32,11 @@ class Match
      */
     private $owner;
     
-    public function __construct()
+    public function __construct(string $name, User $owner)
     {
-        // your own logic
+        $this->match_name = $name;
+        $this->owner = $owner;
+        $this->datetime_created = new \DateTime;
     }
 
     /**
