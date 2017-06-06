@@ -22,6 +22,11 @@ class TriviaCategoryModel {
         return $this->triviaCategoryTable->findAll();
     }
     
+    public function getTriviaCategory($triviaCategoryId)
+    {
+        return $this->triviaCategoryTable->find($triviaCategoryId);
+    }
+    
     public function addTriviaCategory(String $name, String $description) 
     {
         $newTriviaCategory = new TriviaCategory($name, $description);

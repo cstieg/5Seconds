@@ -12,10 +12,12 @@
         <ul>
             {% for triviaCategory in triviaCategories %}
                 <li class="table-row" id="subject{{triviaCategory.id}}">
-                    <form onsubmit="return false;">
-                        <input name="name" type="text" value="{{triviaCategory.name}}" disabled=true>
-                        <input name="description" type="text" value="{{triviaCategory.description}}" disabled=true>
-                    </form>
+                  <span class="table-cell">
+                      <a href="{{path('edit_trivia_category', {triviaCategoryID: triviaCategory.id})}}">
+                          {{triviaCategory.name}}
+                      </a>
+                  </span>
+                  <span class="table-cell">{{triviaCategory.description}}</span>
                 </li>
             {% endfor %}
         </ul>

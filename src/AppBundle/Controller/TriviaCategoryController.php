@@ -39,15 +39,22 @@ class TriviaCategoryController extends Controller
     
     /**
      * @Route("/edittriviacategory/{triviaCategoryID}", name="edit_trivia_category")
-     * @Method({"POST"})
+     * @Method({"POST", "GET"})
      */
     public function editTriviaCategoryAction($triviaCategoryID, Request $request)
     {
         $triviaCategoryModel = new TriviaCategoryModel($this->getDoctrine()->getManager());
-        $newName = $request->get('name');
-        $newDescription = $request->get('description');
-        $triviaCategoryModel->editSubject($triviaCategoryID, $newName, $newDescription);   
-        return new Response(Response::HTTP_OK);
+        if ($request->isMethod('GET'))
+        {
+            $triviaCategory = $triviaCategoryModel->getTriviaCategory($triviaCategoryID);
+            return $this->render('default/edittriviacategory.html.twig', ['triviaCategory' => $triviaCategory,]);            
+        }
+        else if ($request->isMethod('POST')) {        
+            $newName = $request->get('name');
+            $newDescription = $request->get('description');
+            $triviaCategoryModel->editSubject($triviaCategoryID, $newName, $newDescription);   
+            return new Response(Response::HTTP_OK);
+        }
     }    
     
     
@@ -58,7 +65,7 @@ class TriviaCategoryController extends Controller
     public function triviaCategoryMenuAction()
     {
         $triviaCategoryModel = new TriviaCategoryModel($this->getDoctrine()->getManager());
-        $trivia_categories = $triviaCategoryModel->GetTriviaCategories();
+        $trivia_categories = $triviaCategoryModel->getTriviaCategories();
         return $this->render('default/triviacategorymenu.html.twig', ['triviaCategories' => $trivia_categories,]);
     }
 
