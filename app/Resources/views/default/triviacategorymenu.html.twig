@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}5 Seconds - Trivia Category Menu{% endblock %}
+{% block heading1 %}Trivia Category Menu{% endblock %}
+
+{% block body %}
+    <div class="table">
+        <div class="table-row">
+            <span class="table-cell">Trivia category name</span>
+            <span class="table-cell">Description</span>
+        </div>
+        <ul>
+            {% for triviaCategory in triviaCategories %}
+                <li class="table-row" id="subject{{triviaCategory.id}}">
+                    <form onsubmit="return false;">
+                        <input name="name" type="text" value="{{triviaCategory.name}}" disabled=true>
+                        <input name="description" type="text" value="{{triviaCategory.description}}" disabled=true>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        <p>
+            New Trivia Category
+        </p>
+        <form class="table-row" action="{{path('add_trivia_category')}}" method="post">
+            <input class="table-cell" type="text" name="name">
+            <input class="table-cell" type="text" name="description">
+            <input type="submit">
+        </form>
+    </div>
+{% endblock body %}

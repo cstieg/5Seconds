@@ -31,10 +31,12 @@ class TriviaCategory
      */
     private $subject_id;
     
-    public function __construct()
+    public function __construct(String $name, String $description = null)
     {
-        // your own logic
+        $this->name = $name;
+        $this->description = $description;
     }
+
 
     /**
      * Get id

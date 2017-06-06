@@ -27,7 +27,7 @@ class Subject
     private $description;
     
     
-    public function __construct(String $name, String $description)
+    public function __construct(String $name, String $description = null)
     {
         $this->name = $name;
         $this->description = $description;
