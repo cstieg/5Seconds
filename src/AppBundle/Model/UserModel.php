@@ -4,6 +4,7 @@ namespace AppBundle\Model;
 
 use Doctrine\ORM\EntityManager;
 
+
 class UserModel {
 
     private $em;
@@ -20,4 +21,5 @@ class UserModel {
     {
         return $this->userTable->findAll();
     }
+
 }

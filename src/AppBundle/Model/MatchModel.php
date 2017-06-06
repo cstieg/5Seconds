@@ -4,6 +4,7 @@ namespace AppBundle\Model;
 
 use Doctrine\ORM\EntityManager;
 use AppBundle\Entity\Match;
+use AppBundle\Entity\MatchCategory;
 use AppBundle\Entity\User;
 
 class MatchModel {
@@ -28,10 +29,18 @@ class MatchModel {
     public function addMatch(string $name, User $owner, array $subjects) 
     {
         $newMatch = new Match($name, $owner);
-        
-        // TODO: add subjects to MatchCategory
-        
         $this->em->persist($newMatch);
+        
+        foreach ($subjects as $subject)
+        {
+            // TODO: select random TriviaCategory for the Subject, rather than using subject id
+            $trivia_category = $subject->getId();
+            
+            
+            $newMatchCategory = new MatchCategory($newMatch->getId(), $trivia_category);
+            $this->em-persist($newMatchCategory);
+        }
+        
         $this->em->flush();
     }
     

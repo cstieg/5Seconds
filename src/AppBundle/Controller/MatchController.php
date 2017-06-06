@@ -27,10 +27,8 @@ class MatchController extends Controller
             $matchModel = new MatchModel($this->getDoctrine()->getManager());
             $userModel = new UserModel($this->getDoctrine()->getManager());
             $name = $request->get('name');
-            
-            // TODO: get owner from session
-            $owner = $userModel->getUsers()[0];
-            $matchModel->addMatch($name, $owner, []);
+            $subjects = $request->get('subjectlist');
+            $matchModel->addMatch($name, $this->getUser(), $subjects);
             return new Response(Response::HTTP_OK);
         }
     }
