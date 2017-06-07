@@ -29,8 +29,51 @@ class TriviaCategoryLevel
     /**
      * @ORM\Column(type="string", length=4095)
      */
-    private $SQL_source;
+    private $sql_source;
+    
+    /**
+     * @ORM\Column(type="string", length=4095)
+     */
+    private $sql_source;
 
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $question_column;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $answer_column;
+    
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $sort_order;
+    
+    /**
+     * @ORM@Column(type="boolean")
+     */
+    private $is_descending;
+    
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $sort_order;
+        
+    
+    /*
+     * @ORM\Column(type="integer")
+     */
+    private $start_limit;
+    
+    /*
+     * @ORM\Column(type="integer")
+     */
+    private $end_limit;
+    
+    
+    
     
     public function __construct()
     {
