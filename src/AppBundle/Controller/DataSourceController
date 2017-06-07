@@ -1,0 +1,72 @@
+<?php
+
+namespace AppBundle\Controller;
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Model\DataSourceModel;
+
+class DataSourceController extends Controller
+{
+        
+    /**
+     * @Route("/adddatasource", name="add_data_source")
+     * @Method({"POST"})
+     */
+    public function addDataSourceAction(Request $request)
+    {
+        $dataSourceModel = new DataSourceModel($this->getDoctrine()->getManager());
+        $name = $request->get('name');
+        $description = $request->get('description');
+        $dataSourceModel->addDataSource($name, $description);   
+        return $this->redirectToRoute('data_source_menu', array(), 301);
+    }    
+    
+    
+    /**
+     * @Route("/deletedatasource/{dataSourceID}", name="delete_data_source")
+     * @Method({"POST"})
+     */
+    public function deleteDataSourceAction($dataSourceID)
+    {
+        $dataSourceModel = new DataSourceModel($this->getDoctrine()->getManager());
+        $dataSourceModel->deleteDataSource($dataSourceID);   
+        return new Response(Response::HTTP_OK);
+    }    
+    
+    /**
+     * @Route("/editdatasource/{dataSourceID}", name="edit_data_source")
+     * @Method({"POST", "GET"})
+     */
+    public function editDataSourceAction($dataSourceID, Request $request)
+    {
+        $dataSourceModel = new DataSourceModel($this->getDoctrine()->getManager());
+        if ($request->isMethod('GET'))
+        {
+            $dataSource = $dataSourceModel->getDataSource($dataSourceID);
+            return $this->render('default/editdatasource.html.twig', ['dataSource' => $dataSource,]);            
+        }
+        else if ($request->isMethod('POST')) {        
+            $newName = $request->get('name');
+            $newDescription = $request->get('description');
+            $dataSourceModel->editSubject($dataSourceID, $newName, $newDescription);   
+            return new Response(Response::HTTP_OK);
+        }
+    }    
+    
+    
+    /**
+     * @Route("/datasourcemenu", name="data_source_menu")
+     * @Method({"GET"})
+     */
+    public function dataSourceMenuAction()
+    {
+        $dataSourceModel = new DataSourceModel($this->getDoctrine()->getManager());
+        $data_sources = $dataSourceModel->getDataSources();
+        return $this->render('default/datasourcemenu.html.twig', ['dataSources' => $data_sources,]);
+    }
+
+}

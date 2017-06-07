@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}5 Seconds - Data Source Menu{% endblock %}
+{% block heading1 %}Data Source Menu{% endblock %}
+
+{% block body %}
+    <div class="table">
+        <div class="table-row">
+            <span class="table-cell">Trivia category name</span>
+            <span class="table-cell">Description</span>
+        </div>
+        <ul>
+            {% for triviaCategory in triviaCategories %}
+                <li class="table-row" id="subject{{triviaCategory.id}}">
+                  <span class="table-cell">
+                      <a href="{{path('edit_trivia_category', {triviaCategoryID: triviaCategory.id})}}">
+                          {{triviaCategory.name}}
+                      </a>
+                  </span>
+                  <span class="table-cell">{{triviaCategory.description}}</span>
+                </li>
+            {% endfor %}
+        </ul>
+        <p>
+            New Trivia Category
+        </p>
+        <form class="table-row" action="{{path('add_trivia_category')}}" method="post">
+            <input class="table-cell" type="text" name="name">
+            <input class="table-cell" type="text" name="description">
+            <input type="submit">
+        </form>
+    </div>
+{% endblock body %}

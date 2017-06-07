@@ -1,0 +1,52 @@
+<?php
+
+namespace AppBundle\Model;
+
+use Doctrine\ORM\EntityManager;
+use AppBundle\Entity\DataSource;
+
+class DataSourceModel {
+
+    private $em;
+    private $dataSourceTable;
+    
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+        $this->dataSourceTable = $em->getRepository('AppBundle:DataSource');
+    }
+    
+
+    public function getDataSources()
+    {
+        return $this->dataSourceTable->findAll();
+    }
+    
+    public function getDataSource($dataSourceId)
+    {
+        return $this->dataSourceTable->find($dataSourceId);
+    }
+    
+    public function addDataSource(String $name, String $description) 
+    {
+        $newDataSource = new DataSource($name, $description);
+        $this->em->persist($newDataSource);
+        $this->em->flush();
+    }
+    
+    public function deleteDataSource(String $dataSourceID)
+    {
+        $dataSource = $this->dataSourceTable->find($dataSourceID);
+        $this->em->remove($dataSource);
+        $this->em->flush();
+    }
+    
+    public function editDataSource(String $trivaCategoryID, String $name, String $description)
+    {
+        $dataSource = $this->dataSourceTable->find($dataSourceID);
+        $dataSource->setName($name);
+        $dataSource->setDescription($description);
+        $this->em->persist($dataSource);
+        $this->em->flush();
+    }
+}
